@@ -42,9 +42,9 @@ sudo docker container exec sloopstash-${qa2}-crm-app-1 pip install pytest'''
 
     stage('CD execute Eeployment') {
       steps {
-        ansiblePlaybook(playbook: 'playbook/redis.yml', credentialsId: 'ansible-node-ssh', inventory: 'inventory/stg', tags: 'setup,configure,stop,start')
-        ansiblePlaybook(playbook: 'playbook/crm/app.yml', credentialsId: 'ansible-node-ssh', inventory: 'inventory/stg', limit: 'sloopstash-stg-crm-app-1', tags: 'setup,update,configure,stop,start')
-        ansiblePlaybook(playbook: 'playbook/nginx.yml', credentialsId: 'ansible-node-ssh', inventory: 'inventory/stg', tags: 'setup,update,configure,stop,start')
+        ansiblePlaybook(playbook: '/opt/kickstart-ansible/playbook/redis.yml', credentialsId: 'ansible-node-ssh', inventory: 'inventory/stg', tags: 'setup,configure,stop,start')
+        ansiblePlaybook(playbook: '/opt/kickstart-ansible/playbook/crm/app.yml', credentialsId: 'ansible-node-ssh', inventory: 'inventory/stg', limit: 'sloopstash-stg-crm-app-1', tags: 'setup,update,configure,stop,start')
+        ansiblePlaybook(playbook: '/opt/kickstart-ansible/playbook/nginx.yml', credentialsId: 'ansible-node-ssh', inventory: 'inventory/stg', tags: 'setup,update,configure,stop,start')
         input 'Deployment has been successful. Do you want to proceed deployment in production environment?'
       }
     }
